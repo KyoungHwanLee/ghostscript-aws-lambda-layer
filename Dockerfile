@@ -15,6 +15,11 @@ WORKDIR $SRC_DIR/ghostscript-$GS_VERSION
 
 RUN ./autogen.sh --without-luratech && \
   make && \
-  make install
+  make install && \
+  make so
+
+RUN mv sobin/libgs.so ../
+RUN mv sobin/libgs.so.9 ../
+RUN mv sobin/libgs.so.9.54 ../
 
 CMD ["/usr/local/bin/gs"]

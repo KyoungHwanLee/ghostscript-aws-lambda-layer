@@ -8,8 +8,8 @@
   },
   "description": "AWS Lambda layer to provide Ghostscript",
   "scripts": {
-    "prebuild": "rimraf -r build && mkdir -p build/bin",
-    "build": "docker build -t ghostscript-aws-lambda-layer . && CID=$(docker create ghostscript-aws-lambda-layer:latest) && docker cp ${CID}:/usr/local/bin/gs build/bin/gs",
+    "prebuild": "rimraf -r build && mkdir -p build/bin && mkdir -p build/lib",
+    "build": "docker build -t ghostscript-aws-lambda-layer . && CID=$(docker create ghostscript-aws-lambda-layer:latest) && docker cp ${CID}:/usr/local/bin/gs build/bin/gs && docker cp ${CID}:/usr/local/src/ghostscript/libgs.so build/lib/ && docker cp ${CID}:/usr/local/src/ghostscript/libgs.so.9 build/lib/ && docker cp ${CID}:/usr/local/src/ghostscript/libgs.so.9.54 build/lib/ && docker cp ${CID}:/usr/bin/ld.bfd build/bin/ld && docker cp ${CID}:/usr/lib64/ld-2.26.so build/lib/ld-linux-x86-64.so.2 && docker cp ${CID}:/usr/lib64/libc-2.26.so build/lib/libc.so.6 && docker cp ${CID}:/usr/lib64/libdl-2.26.so build/lib/libdl.so.2 && docker cp ${CID}:/usr/lib64/libbfd-2.29.1-30.amzn2.so build/lib/ && docker cp ${CID}:/usr/bin/objdump build/bin/ && docker cp ${CID}:/usr/lib64/libopcodes-2.29.1-30.amzn2.so build/lib/",
     "prerelease": "npm run build",
     "release": "sls deploy"
   },
