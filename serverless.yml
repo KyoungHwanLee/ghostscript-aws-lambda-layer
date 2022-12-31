@@ -2,7 +2,7 @@ service: ghostscript-service
 
 provider:
   name: aws
-  region: ${opt:region, 'ap-northeast-1'}
+  region: ${opt:region, 'ap-northeast-2'}
   stage: ${opt:stage, 'prod'}
 
 layers:
