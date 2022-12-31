@@ -5,6 +5,7 @@ ENV GS_VERSION=9.54.0
 ENV SRC_DIR=/usr/local/src/ghostscript
 
 RUN yum install -y wget
+RUN yum install -y python3-tkinter
 
 RUN mkdir -p $SRC_DIR && \
   cd $SRC_DIR && \
